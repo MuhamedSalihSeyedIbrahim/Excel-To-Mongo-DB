@@ -14,22 +14,23 @@ const mongoose = require("mongoose");
 
 const model = require("./model/db/db");
 
-async function main() {
-  await dbConnection();
+ async function main() {
+  try {
+    await dbConnection();
 
-  let { rows, error } = await readXlsxFile(path, { schema });
-  console.log(rows);
+    let { rows, error } = await readXlsxFile(path, { schema });
+    console.log(rows);
 
-  const { doc, error: dbError } = await model.insertMany(rows);
+    const { doc, error: dbError } = await model.insertMany(rows);
 
-  if (dbError || error) {
-    throw dbError || error;
+    if (dbError || error) {
+      throw dbError || error;
+    }
+  } catch (err) {
+    console.error(err);
+  } finally {
+    mongoose.connection.close();
   }
 }
 
-try {
-  main();
-} catch (err) {
-  console.error(err);
-}
-
+main();

@@ -11,7 +11,7 @@
   "dependencies": {
     "dateformat": "^3.0.3",
     "mongodb": "^3.5.7",
-    "mongoose": "^5.9.15",
+    "mongoose": "^5.9.18",
     "read-excel-file": "^4.0.6"
   }
 }
